@@ -1,183 +1,250 @@
 <!DOCTYPE html>
+
 <head>
-  <meta charset="utf-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>My AngularJS App</title>
-  <meta name="description" content="">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-   <script src="bower_components/angular/angular.js"></script>
-  <script src="bower_components/angular-route/angular-route.js"></script>
-  <script src="bower_components/angular-ui-router/release/angular-ui-router.min.js"></script>
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-  <link rel="stylesheet" href="http://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css">
-  
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>  
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>My AngularJS App</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="bower_components/angular/angular.js"></script>
+    <script src="bower_components/angular-route/angular-route.js"></script>
+    <script src="bower_components/angular-ui-router/release/angular-ui-router.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" href="http://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css">
+
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 </head>
 <style>
-body{
-margin: 0px;
-}
-.header{
-    display: flex;
-    justify-content: space-between;
+    body {
+        margin: 0px;
+    }
+    
+    .header {
+        display: flex;
+        justify-content: space-between;
         background: linear-gradient(141deg, #0fb8ad 0%, #1fc8db 51%, #2cb5e8);
-}
-.header-row{
-    height: 60px;
-   
-}
-.fa{
-    font-size: 22px;
-}
-.btn button{
- width: 65px;
-    height: 25px;
-    background: #3d4042;
-    color: white;
-    border-radius: 10px;
-    border: none;
-    margin-left: 15px;
-}
-.header-label{
-padding: 4px 20px;
-}
-.mainView{
-background-image: url(../images/employee.jpg);
-    background-size: cover;
-    height: calc(100vh - 9.7vh);
-    margin-left: 6%;
-}
-.header-text label{
-
-    font-size: 19px;
-}
-.pd-0{
-
-    padding: 0px;
-}
-.header-text i{
-color: #8676D7;
-
-}
-.side-nav{
+    }
+    
+    .header-row {
+        height: 60px;
+    }
+    
+    .fa {
+        font-size: 22px;
+    }
+    
+    .btn button {
+        width: 65px;
+        height: 25px;
+        background: #3d4042;
+        color: white;
+        border-radius: 10px;
+        border: none;
+        margin-left: 15px;
+    }
+    
+    .header-label {
+        padding: 4px 20px;
+    }
+    
+    .mainView {
+        height: calc(100vh - 9.7vh);
+        margin-left: 6%;
+        widows: 94%;
+        display: flex;
+    }
+    
+    .header-text label {
+        font-size: 19px;
+    }
+    
+    .pd-0 {
+        padding: 0px;
+    }
+    
+    .header-text i {
+        color: #8676D7;
+    }
+    
+    .side-nav {
     height: 100%;
     width: 6%;
     margin-top: 60px;
+    padding-top: 40px;
     position: fixed;
     z-index: 1;
     top: 0;
     left: 0;
     background-color: #111;
     overflow-x: hidden;
-    padding-top: 20px;
-}
-.header-text label{
-background: -webkit-linear-gradient(left, #8676D7 , #2cb5e8);
-   background: -o-linear-gradient(right, #8676D7, #2cb5e8);
-   background: -moz-linear-gradient(right, #8676D7, #2cb5e8);
-   background: linear-gradient(to right, #8676D7 , #2cb5e8); 
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
+    background: #F6FAFD;
+    }
+    .bg-color{
+        
+    background: #F6FAFD;
+    }
+     .nav-content i{
+            font-size: 40px;
+            padding:  12px 23px 12px 23px;
+                
+    }
+    
+    
+     .nav-content {
+    border-right: 1.5px solid #9c9c9c;
+                
+    }
+    .nav-content div:hover{
+        border-right: 3px solid #2cb5e8;
+        cursor: pointer;
+        background: #d7dada;
+    }
+    .header-text label {
+        background: -webkit-linear-gradient(left, #8676D7, #2cb5e8);
+        background: -o-linear-gradient(right, #8676D7, #2cb5e8);
+        background: -moz-linear-gradient(right, #8676D7, #2cb5e8);
+        background: linear-gradient(to right, #8676D7, #2cb5e8);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+    }
+    .center-content-header{
+            padding: 2% 0px 0px 5%;
+    }
+    .center-content-header label{
+    font-size: 15px;
+    background: -webkit-linear-gradient(left, #8676D7, #2cb5e8);
+    background: -o-linear-gradient(right, #8676D7, #2cb5e8);
+    background: -moz-linear-gradient(right, #8676D7, #2cb5e8);
+    background: linear-gradient(to right, #8676d7, #2cb5e8);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    border-bottom: 2px solid #eaeaea;
+    padding-bottom: 8px;
+    font-weight: bold;
+    }
+    .header-row div {}
+    
+    .first-half-header .col-md-1 {
+        width: 5%;
+    }
+    
+    .first-half-header {
+        padding: 20px 0px 8px 15px;
+    }
+    
+    .text-field {
+        border-radius: 20px;
+        width: 52%;
+        border: 1px solid;
+        padding-left: 3%;
+        height: 30px;
+    }
+    
+    .gradient-section {
+        background: -webkit-linear-gradient(left, #8676D7, #2cb5e8);
+        background: -o-linear-gradient(right, #8676D7, #2cb5e8);
+        background: -moz-linear-gradient(right, #8676D7, #2cb5e8);
+        background: linear-gradient(to right, #8676D7, #2cb5e8);
+        height: 60px;
+    }
+    
+    .form-control-feedback {
+        top: -2px;
+        right: 0;
+        left: 44%;
+    }
+    
+    .pd-top-5 {
+        padding-top: 5px;
+    }
+    .center-content{
+        width: 76%;
+    }
+    .right-content{
+        width: 24%;
+    }
+    .center-content-section-1{
+        display: flex;
+    }
+</style>
 
-}
-.header-row div{
-
-}
-.first-half-header .col-md-1{
-    width: 5%;
-}
-.first-half-header{
-    padding: 20px 0px 8px 15px;
-}
-.text-field{
-    border-radius: 20px;
-    width: 52%;
-    border: 1px solid;
-    padding-left: 3%;
-    height: 30px;
-
-}
-.gradient-section{
-background: -webkit-linear-gradient(left, #8676D7 , #2cb5e8);
-   background: -o-linear-gradient(right, #8676D7, #2cb5e8);
-   background: -moz-linear-gradient(right, #8676D7, #2cb5e8);
-   background: linear-gradient(to right, #8676D7 , #2cb5e8);
-  height: 60px;
-}
-.form-control-feedback{
-    top: -2px;
-    right: 0; 
-    left: 44%;
-
-
-}
-.pd-top-5{
-
-    padding-top: 5px;
-}
-    </style>
 <body>
 
-  <div ng-app="myApp">
-  <div ng-controller="indexCtrl">
+    <div ng-app="myApp">
+        <div ng-controller="indexCtrl">
 
 
-    <div class="header-row">
+            <div class="header-row">
 
-        <div class="col-md-8 first-half-header">
-            <div class="col-md-2 header-text">
-            <div class="col-md-2 pd-0"><i class="fa fa-file"></i></div>
-            <div class="col-md-10 pd-0"><label class="">leapdash</label></div>
+                <div class="col-md-8 first-half-header">
+                    <div class="col-md-2 header-text">
+                        <div class="col-md-2 pd-0"><i class="fa fa-file"></i></div>
+                        <div class="col-md-10 pd-0"><label class="">leapdash</label></div>
+                    </div>
+                    <div class="col-md-1">
+                        <i class="fa fa-bars pd-top-5"></i>
+                    </div>
+                    <div class="col-md-1">
+                        <i class="fa fa-table pd-top-5"></i>
+                    </div>
+                    <div class="col-md-8">
+                        <input type="text" class="text-field" placeholder="Search">
+                        <span class="glyphicon glyphicon-search form-control-feedback"></span>
+                    </div>
+                </div>
+
+                <div class="col-md-4" style="padding-right: 0px;">
+
+                    <div class="col-md-2 first-half-header">
+                        <i class="fa fa-bell"></i>
+                    </div>
+                    <div class="col-md-2 first-half-header">
+                        <i class="fa fa-comments"></i>
+                    </div>
+                    <div class="col-md-8 first-half-header gradient-section">
+                        <div class="col-md-8"> Tony Stark </div>
+                        <div class="col-md-4"><i class="fa fa-filter"></i></div>
+                    </div>
+
+                </div>
+
+
             </div>
-            <div class="col-md-1">
-                <i class="fa fa-bars pd-top-5"></i>
+
+            <div class="side-nav">
+              <div class="nav-content">
+                <div> <i class="fa fa-comments"></i></div>
+                <div> <i class="fa fa-comments"></i></div>
+                <div> <i class="fa fa-comments"></i></div>
+                <div> <i class="fa fa-comments"></i></div>
+             </div>
             </div>
-            <div class="col-md-1">
-                <i class="fa fa-table pd-top-5"></i>
-            </div>
-            <!--<div class="form-group col-md-8" style="padding-left: 1%;">
-            <div class="form-group has-feedback">
-                <input type="text" class="form-control" id="inputValidation" placeholder="Search"/>
-                <span class="glyphicon glyphicon-search form-control-feedback"></span>
-            </div>
-            </div>-->
-            <div class="col-md-8" >
-                <input type="text" class="text-field" placeholder="Search">
-                <span class="glyphicon glyphicon-search form-control-feedback"></span>
+            <div class="mainView bg-color">
+                <div class="center-content">
+                       <div class="center-content-header">
+                           <label>
+                           Leapdash  &nbsp / &nbsp  Dashboard V1
+                           </label>
+                       </div>
+
+                       <div class="center-content-section-1">
+
+                       </div>   
+
+                </div>
+
+
+                <div class="right-content">
+                        Hello
+                </div>
             </div>
         </div>
-
-        <div class="col-md-4" style="padding-right: 0px;">
-
-        <div class="col-md-2 first-half-header">
-             <i class="fa fa-bell"></i>
-        </div>
-        <div class="col-md-2 first-half-header">
-            <i class="fa fa-comments"></i>
-        </div>
-        <div class="col-md-8 first-half-header gradient-section">
-            <div class="col-md-8"> Tony Stark </div>
-            <div class="col-md-4"><i class="fa fa-filter"></i></div>
-        </div>
-
-        </div>
-        
-        
     </div>
 
-  <div class="side-nav">
-    <div>Hello</div>
-    <div>Hello</div>
-    <div>Hello</div>
-    <div>Hello</div>
-  </div>
-  <div class="mainView" data-ui-view=""></div>
-  </div>
-  </div>
- 
-  <script src="app.js"></script>
-  <script src="services/mock-service.js"></script>
-  <script src="controller/dashboard-controller.js"></script>
-  <script src="controller/index-controller.js"></script>
+    <script src="app.js"></script>
+    <script src="services/mock-service.js"></script>
+    <script src="controller/dashboard-controller.js"></script>
+    <script src="controller/index-controller.js"></script>
 </body>
+
 </html>
