@@ -1,0 +1,89 @@
+{
+  "id": 1,
+  "name": "Leanne Graham",
+  "stats": [
+    {
+      "name": "John",
+      "color": "#69E6E8",
+      "data": [
+        3,
+        4,
+        3,
+        5,
+        4,
+        10,
+        12
+      ]
+    },
+    {
+      "name": "Jane",
+      "color": "#7CEBA9",
+      "data": [
+        1,
+        3,
+        4,
+        3,
+        3,
+        5,
+        4
+      ]
+    }
+  ],
+  "visitorCircle": [
+    {
+      "name": "Speed",
+      "data": [
+        80
+      ],
+      "dataLabels": {
+        "enabled": false
+      }
+    }
+  ],
+  "visitorBar": [
+    {
+      "name": "Tokyo",
+      "color": "#7CEBA9",
+      "data": [
+        49.9,
+        71.5,
+        106.4,
+        129.2
+      ]
+    }
+  ],
+  "progressBar1": [
+    25
+  ],
+  "progressBar2": [
+    45
+  ],
+  "progressBar3": [
+    75
+  ],
+  "OS": [
+    {
+      "name": "Browsers",
+      "data": [
+        [
+          "Firefox",
+          6
+        ],
+        [
+          "MSIE",
+          4
+        ],
+        [
+          "Chrome",
+          7
+        ]
+      ],
+      "size": "100%",
+      "innerSize": "80%",
+      "showInLegend": true,
+      "dataLabels": {
+        "enabled": false
+      }
+    }
+  ]
+}

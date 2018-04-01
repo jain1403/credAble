@@ -1,5 +1,4 @@
 (function() {
-
   angular.module("myApp").factory('userService', ['$q','$rootScope','$http', function($q, $rootScope,$http) {
 		var url=$rootScope.url;
     	var sampleData;
@@ -20,14 +19,7 @@
     	    	userCall: function(token){
     				var request = {
     					'method': 'GET',
-    					'url':'../mock-data/employee.json'
-    					};
-    				return networkCall(request);
-    			},
-                loginCall: function(token){
-    				var request = {
-    					'method': 'GET',
-    					'url':'../mock-data/login-data.json'
+    					'url':'../mock-data/userData.json'
     					};
     				return networkCall(request);
     			}

@@ -6,13 +6,18 @@
     <title>My AngularJS App</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="bower_components/angular/angular.js"></script>
     <script src="bower_components/angular-route/angular-route.js"></script>
     <script src="bower_components/angular-ui-router/release/angular-ui-router.min.js"></script>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <link rel="stylesheet" href="http://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css">
-
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="https://code.highcharts.com/highcharts.js"></script>
+    <script src="http://code.highcharts.com/highcharts-more.js"></script>
+    <script src="http://code.highcharts.com/modules/solid-gauge.js"></script>    
+    <script src="https://code.highcharts.com/modules/exporting.js"></script>
+    <script src="https://rawgit.com/highcharts/rounded-corners/master/rounded-corners.js"></script>
 </head>
 <style>
     body {
@@ -51,7 +56,7 @@
         height: calc(100vh - 9.7vh);
         margin-left: 6%;
         widows: 94%;
-        display: flex;
+        overflow: auto;
     }
     
     .header-text label {
@@ -84,18 +89,16 @@
     background: #F6FAFD;
     }
      .nav-content i{
-            font-size: 40px;
+            font-size: 36px;
             padding:  12px 23px 12px 23px;
-                
+            color: #bdb9b9;
     }
-    
-    
      .nav-content {
-    border-right: 1.5px solid #9c9c9c;
+    border-right: 1px solid #eee;
                 
     }
     .nav-content div:hover{
-        border-right: 3px solid #2cb5e8;
+        border-right: 3px solid #8676d7;
         cursor: pointer;
         background: #d7dada;
     }
@@ -118,7 +121,7 @@
     background: linear-gradient(to right, #8676d7, #2cb5e8);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
-    border-bottom: 2px solid #eaeaea;
+    border-bottom: 1px solid #eee;
     padding-bottom: 8px;
     font-weight: bold;
     }
@@ -166,6 +169,70 @@
     .center-content-section-1{
         display: flex;
     }
+    .button{
+    padding: 5px 25px 7px 27px;
+    }
+    .button:hover{
+    border-radius: 42px;
+    background: #9484CE;
+    cursor: pointer;
+    }
+   .highcharts-title{
+        font-size: 45px!important;
+    }
+    .loader {
+    border: 16px solid #f3f3f3;
+    border-radius: 50%;
+    border-top: 16px solid #3498db;
+    width: 120px;
+    height: 120px;
+    -webkit-animation: spin 2s linear infinite; /* Safari */
+    animation: spin 2s linear infinite;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    }
+    #overlay {
+        position: fixed;
+        display: block;
+        width: 100%;
+        height: 100%;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-color: rgba(0,0,0,0.5);
+        z-index: 2;
+        cursor: pointer;
+    }
+    .hover-css:hover{
+        cursor: pointer;
+        width: 332px;
+        height: 48px;
+        background: #887c7c;
+        border-radius: 7px;
+    }
+
+    #text{
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        font-size: 50px;
+        color: white;
+        transform: translate(-50%,-50%);
+        -ms-transform: translate(-50%,-50%);
+    }
+
+    /* Safari */
+    @-webkit-keyframes spin {
+    0% { -webkit-transform: rotate(0deg); }
+    100% { -webkit-transform: rotate(360deg); }
+    }
+
+    @keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+    }
 </style>
 
 <body>
@@ -202,7 +269,7 @@
                         <i class="fa fa-comments"></i>
                     </div>
                     <div class="col-md-8 first-half-header gradient-section">
-                        <div class="col-md-8"> Tony Stark </div>
+                        <div class="col-md-8"> {{name}} </div>
                         <div class="col-md-4"><i class="fa fa-filter"></i></div>
                     </div>
 
@@ -213,13 +280,18 @@
 
             <div class="side-nav">
               <div class="nav-content">
-                <div> <i class="fa fa-comments"></i></div>
-                <div> <i class="fa fa-comments"></i></div>
-                <div> <i class="fa fa-comments"></i></div>
-                <div> <i class="fa fa-comments"></i></div>
+                <div> <i class="fa fa-tachometer"></i></div>
+                <div> <i class="fa fa-envelope"></i></div>
+                <div> <i class="fa fa-bell"></i></div>
+                <div> <i class="fa fa-file"></i></div>
              </div>
             </div>
-            <div class="mainView bg-color">
+            
+            <div ng-show="loading" id="overlay">
+                <div class="loader"></div>
+            </div>
+            <div ng-show="!loading" class="mainView bg-color">
+               <div style="display: flex;"> 
                 <div class="center-content">
                        <div class="center-content-header">
                            <label>
@@ -228,19 +300,186 @@
                        </div>
 
                        <div class="center-content-section-1">
+                            <div class="" style="width: 20%;text-align: center;padding: 25px;">
+                                   <div>
+                                    <i  style="font-size: 90px;color: #8676d7;" class="fa fa-cloud"></i>
+                                    </div>
+                                    <div style="font-size: 25px;">
+                                        24 &#8451;
+                                    </div>
+                                    <div style="font-size: 13px;">
+                                        CLOUDY
+                                    </div>
 
-                       </div>   
+                            </div>
+                            <div class="" style="width: 80%;padding: 20px;">
+                                   <div ng-cloak style="font-size: 40px;border: 0;border-bottom: 1px solid #eee;color: #8676d7">
+                                        Good Morning , {{name.split(" ")[0]}}
+                                   </div>
+                                   <div style="font-size: 15px;padding: 10px 65px 25px 0px;">
+                                       You have 5 important tasks today, some messages and notifications finish tem all! 
+                                       or you can also Edit Tasks.
+                                   </div>
+                                   <div style="display: flex;">
+                                       <div style="padding-right: 25px;">
+                                           <button style="width: 130px;height: 30px;background: linear-gradient(141deg, #469a96 0%, #4ca5af 51%, #cad2dc);border: none;border-radius: 6px;">Today's Weather</button>
+                                       </div>
+                                       <div style="padding-right: 25px;">
+                                           <button style="width: 130px;height: 30px;background: none;border: 1px solid;border-radius: 6px;">Today's Task</button>
+                                       </div>
+                                       <div style="padding-right: 25px;">
+                                           <button style="width: 130px;height: 30px;background: linear-gradient(141deg, #d299c6 0%, #9d8fab 51%, #877298);border-radius: 6px;border: none;">Open Calender</button>
+                                       </div>
+                                   </div>
+                            </div>
+                       </div>  
 
+                       <div style="display: flex;">
+                            <div style="flex: 1;">
+                              <img style="height:180px;padding-left: 20px;" src="images/1111.jpg">  
+                            </div>
+                             <div style="flex: 1;">
+                              <img style="height:180px;padding-left: 20px;" src="images/1111.jpg">  
+                            </div>
+                             <div style="flex: 1;">
+                              <img style="height:180px;padding-left: 20px;" src="images/1111.jpg">  
+                            </div>
+                       </div>
+
+                       <div style="padding: 20px 11px 20px 20px;">
+                            <div style="display: flex;">
+                                    <div style="width: 95%;display: flex;background: white; padding: 18px 0px 18px 24px;">
+                                        <div style="flex: 6">
+                                            <span></span>
+                                            <span>Stats</span>
+                                        </div>
+                                        <div style="flex: 3">
+                                            <span class="button" style="border-radius: 42px;background: #9484CE;">Hourly</span>
+                                            <span class="button">Daily</span>
+                                            <span class="button">Weekly</span>
+                                        </div>
+                                    </div>
+                                    <div style="width: 5%;padding: 15px; background: #F3F4F6;">
+                                        <i class="fa fa-refresh"></i>
+                                    </div>
+                            </div>
+                            <div>
+                                <div id="stats" style="height: 400px;width: 932px; margin: 0 auto"></div>
+                            </div>
+                       </div>
+                       <div>
+                            <img style="height:527px;padding-left: 20px;" src="images/3333.jpg">  
+                       </div>
+
+                        
+                       
                 </div>
 
 
                 <div class="right-content">
-                        Hello
+                        <div style="margin: 18px;background: white;">
+                            <div>
+                                <label style="padding: 15px 0px 0px 30px;">Online Visitors</label>
+                            </div>
+                            <div style="">
+                                <div id="visitorCircle" style="height: 200px;"></div>
+                            </div>
+                            <div style="text-align: center;padding: 0px 0px 8px 0px;font-size: 15px;font-weight: bold;">
+                                25 Live on Site Now
+                            </div>   
+                            <div>
+                                <div id="visitorBar" style="height: 230px;margin: 0 auto"></div>
+                            </div>
+                        </div>
+
+                        <div style="margin: 20px;background: white;height: 375px;">
+                            <div>
+                                <label style="padding: 15px 18px 15px 35px;margin: 0px;">Chat History<label>
+                            </div>
+                            <div>
+                                <!--<div style="display: flex;">
+                                    <div>
+                                        img
+                                    </div>
+                                    <div>
+                                        <span>Adarsh Jain</span>
+                                        <span>1 minute ago</span>
+                                    </div>
+                                </div>
+                                <div>
+                                    Holla here is the fun !!!!
+                                </div>-->
+                            </div>
+                        </div>
+
+                        <div style="margin: 20px;padding-top: 60px;">
+                            <div style="padding-bottom: 20px;padding-top: 20px;border: 0;border-bottom: 1px solid #eee;">
+                                <div style="font-family: monospace;">Australia</div>
+                                <div style="font-size: 25px;">1,000,000</div>
+                                <div id="progressBar1" style="width: 200px;"></div>
+                                <div style="width: 200px;">
+                                    <span>Session</span>
+                                    <span style="float: right;">50%</span>
+                                </div>
+                            </div>
+                            <div style="padding-bottom: 20px;padding-top: 20px;border: 0;border-bottom: 1px solid #eee;">
+                                <div style="font-family: monospace;">China</div>
+                                <div style="font-size: 25px;">675,000</div>
+                                <div id="progressBar2" style="width: 200px;"></div>
+                                <div style="width: 200px;">
+                                    <span>Session</span>
+                                    <span style="float: right;">60%</span>
+                                </div>
+                            </div>
+                            <div style="padding-bottom: 20px;padding-top: 20px;border: 0;border-bottom: 1px solid #eee;">
+                                <div style="font-family: monospace;">United States</div>
+                                <div style="font-size: 25px;">675,000</div>
+                                <div id="progressBar3" style="width: 200px;"></div>
+                                <div style="width: 200px;">
+                                    <span>Session</span>
+                                    <span style="float: right;">70%</span>
+                                </div>
+                            </div>
+                        </div>
                 </div>
+              </div>
+
+                <div style="display: flex;">
+                    <div style="flex:1;background: white;height: 400px;margin: 2%;">
+                        <div style="padding: 20px; font-size: 18px;font-family: sans-serif;">
+                            Comments
+                        </div>
+                    </div>
+                    <div style="flex:1;background: white;height: 400px;margin: 2%;">
+                        <div style="padding: 20px; font-size: 18px;font-family: sans-serif;">
+                            Operating System
+                        </div>
+                        <div>
+                            <div id="os" style="height: 180px;width: 300px;margin: 0 auto"></div>
+                        </div>
+                        <div class="hover-css" style="margin: 10px 20px 0px 20px;padding: 12px;border-top: 1px solid beige;border-bottom: 1px solid beige;">
+                            <span>Windows</span>
+                            <span style="float: right">50%</span>
+                        </div>
+                        <div class="hover-css" style="margin: 0px 20px 0px 20px;padding: 12px;border-bottom: 1px solid beige;">
+                            <span>Windows</span>
+                             <span style="float: right">40%</span>
+                        </div>
+                        <div  class="hover-css" style="margin: 0px 20px 0px 20px;padding: 12px;border-bottom: 1px solid beige;">
+                            <span>Windows</span>
+                             <span style="float: right">5%</span>
+                        </div>
+                    </div>
+                    <div style="flex:1;background: white;height: 400px;margin: 2%;">
+                        <div style="padding: 20px; font-size: 18px;font-family: sans-serif;">
+                            Users
+                        </div>
+                    </div>
+                </div>
+
             </div>
         </div>
     </div>
-
     <script src="app.js"></script>
     <script src="services/mock-service.js"></script>
     <script src="controller/dashboard-controller.js"></script>
